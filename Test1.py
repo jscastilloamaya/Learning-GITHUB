@@ -22,5 +22,3 @@ print("Rama 1")
 
 print("Rama 3 Pro mega cambiada")
 rama3=3
-print("romper codigo")
-rama3=3
