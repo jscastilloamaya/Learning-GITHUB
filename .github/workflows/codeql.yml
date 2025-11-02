@@ -47,4 +47,8 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
         with:
-          category: "/language:${{ matrix.language }}"
+           category: "/language:${{ matrix.language }}"
+           upload: true                       # ✅ fuerza la subida del resultado SARIF
+           output: results.sarif              # ✅ guarda el resultado localmente también
+       - name: Perform CodeQL Analysis
+  
