@@ -10,7 +10,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze (${{ matrix.language }})
+    name: CodeQL Scan (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
 
     permissions:
@@ -23,8 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - language: python     # ✅ <--- agrega el lenguaje aquí
-            build-mode: none     # usa 'none' si no necesitas compilar
+          - language: python
+            build-mode: none
 
     steps:
       - name: Checkout repository
@@ -35,6 +35,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
+          queries: +security-extended,security-and-quality   # ✅ Añadido
 
       - name: Run manual build steps
         if: matrix.build-mode == 'manual'
