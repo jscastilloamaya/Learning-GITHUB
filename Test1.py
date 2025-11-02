@@ -23,6 +23,7 @@ print("Rama 1")
 print("Rama 3 Pro mega cambiada")
 rama3=3
 
+
 # file: vulnerable.py
 
 import os
@@ -37,3 +38,29 @@ user_input = input("Enter your username: ")
 delete_user_file(user_input)
 
 print("Generar alerta en CodeQL")
+
+# sql_injection.py
+import sqlite3
+
+def get_user(username):
+    conn = sqlite3.connect("users.db")
+    # 🚨 Vulnerable: concatenación directa del input en la consulta
+    query = "SELECT * FROM users WHERE username = '%s';" % username
+    cur = conn.execute(query)
+    return cur.fetchall()
+
+if __name__ == "__main__":
+    u = input("username: ")
+    print(get_user(u))
+
+# cmd_injection.py
+import subprocess
+
+def list_user_files(user):
+    # 🚨 Vulnerable: shell=True con entrada directa del usuario
+    cmd = f"ls -la /home/{user}"
+    subprocess.run(cmd, shell=True)
+
+if __name__ == "__main__":
+    u = input("user: ")
+    list_user_files(u)
