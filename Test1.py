@@ -64,3 +64,17 @@ def list_user_files(user):
 if __name__ == "__main__":
     u = input("user: ")
     list_user_files(u)
+
+
+import sqlite3
+
+def get_user_info():
+    conn = sqlite3.connect("users.db")
+    username = input("Enter username: ")
+    # 🚨 Vulnerabilidad: concatenar directamente el input del usuario
+    query = "SELECT * FROM users WHERE username = '" + username + "';"
+    result = conn.execute(query)
+    for row in result:
+        print(row)
+
+get_user_info()
