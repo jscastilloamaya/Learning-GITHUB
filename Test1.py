@@ -35,3 +35,5 @@ def delete_user_file(username):
 # Simulamos entrada del usuario
 user_input = input("Enter your username: ")
 delete_user_file(user_input)
+
+print("Generar alerta en CodeQL")
