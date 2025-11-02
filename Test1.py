@@ -22,3 +22,16 @@ print("Rama 1")
 
 print("Rama 3 Pro mega cambiada")
 rama3=3
+
+# file: vulnerable.py
+
+import os
+
+def delete_user_file(username):
+    # 🚨 Vulnerabilidad: el input del usuario se usa directamente en un comando del sistema
+    command = f"rm -rf /home/{username}/data"
+    os.system(command)
+
+# Simulamos entrada del usuario
+user_input = input("Enter your username: ")
+delete_user_file(user_input)
